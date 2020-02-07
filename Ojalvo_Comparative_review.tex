@@ -215,19 +215,32 @@ and 3D Shape analysis. They have already been studied for particle for particle 
 applications in \cite{GNN_particletracking1,GNN_particletracking2} and for the problem
 of particle event classification in \cite{GNN_ec_1, GNN_ec_2, GNN_ec_3}.
 
-Our group is already 
+Our group is working with Lindsey Gray (CMS, FNAL)
 
-For track finding, we consider only tracks and hits in the barrel region of the detector. 
 The graph is constructed so that the nodes are the hits recorded by the detector and the 
 edges are connections of the hits between adjacent detector layers that pass a pre-defined
-filter that is tuned to be efficient for tracks resulting from high transverse momentum
-particles. Figure %%ref figure
-shows 
+filter which is tuned to be efficient for tracks resulting from high transverse momentum
+particles. Work done by the Exa.Trkx group %cite
+has successfully constructed a GNN architecture which first tranforms input node and edge
+fratures into latent represenentations, a graph module which performs message passing to
+update latent features, and an output module which computers edge classification scores.
+The encoder uses two fully-conneected 2-layer networks for trnasforming node and edge
+features, respectively. The graph module is applied recursively to the latent features.
+After N iterations of graph module, the output module takes the last latent features
+and uses a 2-layer fully-connected network to produce classification scores for every
+edge. Studies from this group show that N = 8 graph iterations give the best model
+performance.
+
+Figure %%ref figure
+, produced by Princeton graduate student Gage DeZoort, shows event displays of high quality
+tracks which will be used for training.
+
 
 %GNNs were first introduced in [16] and have been applied to a growing variety of problems including social networks, knowledge graphs, recommender systems, and 3D shape analysis [19, 5]. They were first studied for particle tracking applications in [10] and were also studied for the problem of particle and event classification in [3, 13, 15, 7].
 
-%For track finding, we consider only tracks and hits in the barrel region of the detector. The graph is constructed so that the nodes are the hits recorded by the detector and the edges are connections of the hits between adjacent detector layers that pass a pre-defined filter that is tuned to be efficient for tracks resulting from high transverse momentum particles. In the input graphs, node features are the three cylindrical coordinates (r, φ, z) and edge features are the difference of the coordinates (∆η, ∆φ). The edge labels are 1 if two hits come from the same track, and 0 otherwise.
-%The GNN architecture has three components: an encoder which transforms input node and edge features into their latent representations, a graph module which performs message passing to update latent features, and an output module which computes edge classification scores. A diagram of the architecture is shown in figure 1. The encoder uses two fully-connected 2-layer networks for transforming node and edge features, respectively. The initial latent features of the nodes and edges are collectively named H0. The graph module is applied recursively to the latent features. At each iteration i the initial features H0 are concatenated onto the current features Hi. This shortcut connection was empirically found to improve model performance. The graph module also uses two fully-connected 2-layer networks, one which computes updated edge features and one which computes updated node features using aggregated incoming edge features. After N iterations of the graph module, the output module takes the last latent features HN and uses a 2-layer fully-connected network to produce classification scores for every edge. All fully-connected layers use a hidden size of 128 and ReLU activation functions, except the final layer of the output module which uses sigmoid activation. We found that using N = 8 graph iterations gave the best model performance.
+%The graph is constructed so that the nodes are the hits recorded by the detector and theedges are connections of the hits between adjacent detector layers that pass a pre-defined filter that is tuned to be efficient for tracks resulting from high transverse momentum particles. In the input graphs, node features are the three cylindrical coordinates (r, φ, z) and edge features are the difference of the coordinates (∆η, ∆φ). The edge labels are 1 if two hits come from the same track, and 0 otherwise.
+%The GNN architecture has three components:
+%an encoder which transforms input node and edge features into their latent representations, a graph module which performs message passing to update latent features, and an output module which computes edge classification scores. A diagram of the architecture is shown in figure 1. The encoder uses two fully-connected 2-layer networks for transforming node and edge features, respectively. The initial latent features of the nodes and edges are collectively named H0. The graph module is applied recursively to the latent features. At each iteration i the initial features H0 are concatenated onto the current features Hi. This shortcut connection was empirically found to improve model performance. The graph module also uses two fully-connected 2-layer networks, one which computes updated edge features and one which computes updated node features using aggregated incoming edge features. After N iterations of the graph module, the output module takes the last latent features HN and uses a 2-layer fully-connected network to produce classification scores for every edge. All fully-connected layers use a hidden size of 128 and ReLU activation functions, except the final layer of the output module which uses sigmoid activation. We found that using N = 8 graph iterations gave the best model performance.
 
 This indicates great potential for discovering GNN architectures which can scale 
 to very large number of edges and that can handle multiple high energy particle 
@@ -236,11 +249,20 @@ high energy physics to focus on certain types of acceleration and better determi
 where to spend resources and effort in order to become as efficient as possible.
 
 We propose to transition the most CPU intensive steps, hit clustering and layer linking,
-to a highly parallel computing architecture making use of CPUs which have an FPGA co-processor. We have access to an Intel Xenon CPU + FPGA co-processor at computing 
-facilities at CERN and two similar devices are planned to be acquired at the 
-Princeton Research Computing center. We are excited to share progress regularly 
-in DataX forums and to collaborate with members of both the physics and computer science communities for advancement. For implementation, we will modify the existing cluster and track seed finding steps by developing a shallow NN to identify and disentangle shared clusters and then link clusters in neighboring layers to create primitive tracks. Monte Carlo truth information, which models the helical path of the charged particle through the detector, will be used for the training. We plan to test the NN performance on simulated events with 10 tracks, 100 tracks and 500 tracks. The completion of this project will result in the mapping out of resource usage and latency for various ranges of input data and network architectures.
-Upon successful completion of this project, our group will be the first to complete a NN based approach to track hit clustering and track seed reconstruction using an FPGA co-processor architecture, which will help maximize the HL-LHC physics reach. We will use these first preliminary studies to submit proposals to the DOE and to the NSF which will fully utilize FPGA co-processors to accelerate online object reconstruction at the CMS experiment. Specifically we will submit proposals to both continue the algorithmic research into using FPGAs (DOE Office of Science, SciDAC and ASCR, NSF PHY and OAC), and also for testbed compute resources (e.g. NSF CC* and/or MRI Track 1) as well as an eventual potential hardware upgrade (NSF MRI Track 2) for the CMS experiment.
+to a highly parallel computing architecture making use of CPUs which have an FPGA co-processor.
+The Princeton Research Computing center has recently purchased an Intel Xenon CPU + FPGA co-processor
+and similar devices areavailable at CERN. We are excited to share progress regularly 
+in USCMS forums and to collaborate with members of both the physics and computer science communities
+for advancement. 
+
+Monte Carlo truth information, which models the helical path of the charged particle through the detector,
+will be used for the training. We plan to test the GNN performance on simulated events with 10 tracks,
+100 tracks and 500 tracks. The completion of this project will result in the mapping out of resource
+usage and latency for various ranges of input data and network architectures.
+We have also submitted proposals to both continue the algorithmic
+research into using FPGAs (DOE Office of Science, SciDAC and ASCR, NSF PHY and OAC), and also for testbed
+compute resources (e.g. NSF CC* and/or MRI Track 1) as well as an eventual potential hardware upgrade
+(NSF MRI Track 2) for the CMS experiment. %% Check me
 
 
 %%end copied
