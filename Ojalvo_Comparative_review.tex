@@ -1,0 +1,300 @@
+%% This is file `elsarticle-template-1-num.tex',
+%%
+%% Copyright 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%%
+%% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
+%% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
+%%
+\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% The graphicx package provides the includegraphics command.
+\usepackage{graphicx}
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+\usepackage{lineno}
+
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+\journal{Journal Name}
+
+\usepackage[top=1in, bottom=1.5in, left=1in, right=1in]{geometry}
+\usepackage[
+    %backend=biber, 
+    natbib=true,
+    style=numeric,
+    sorting=none
+]{biblatex}
+\addbibresource{sample.bib}
+
+\begin{document}
+
+
+%\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%\title{b~flavored Jets as a Handle for Direct Measurement of ggH production of the Higgs and its subsequent decay to $b\bar{b}$ during Run 3 and Run 4 at the LHC/HL-LHC}
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \auth or or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+ %\author{Prof. Isobel Ojalvo}
+ %\ead{iojalvo@princeton.edu}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+
+%\author{John Smith}
+
+%\address{California, United States}
+
+%\begin{abstract}
+%% Text of abstract
+%Suspendisse potenti. Suspendisse quis sem elit, et mattis nisl. Phasellus consequat erat eu velit rhoncus non pharetra neque auctor. Phasellus eu lacus quam. Ut ipsum dolor, euismod aliquam congue sed, lobortis et orci. Mauris eget velit id arcu ultricies auctor in eget dolor. Pellentesque suscipit adipiscing sem, imperdiet laoreet dolor elementum ut. Mauris condimentum est sed velit lacinia placerat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam diam metus, pharetra vitae euismod sed, placerat ultrices eros. Aliquam tincidunt dapibus venenatis. In interdum tellus nec justo accumsan aliquam. Nulla sit amet massa augue.
+%\end{abstract}
+
+
+%\begin{keyword}
+%Science \sep Publication \sep Complicated
+%% keywords here, in the form: keyword \sep keyword
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+%\end{keyword}
+
+%\end{frontmatter}
+
+%%
+%% Start line numbering here if you want
+%%
+%\linenumbers
+
+%% main text
+
+
+\noindent
+\textbf{Acceleration of Track Reconstruction at CMS Using FPGA Co-processors}
+
+\section{Overview}
+\label{S:1}
+As a member of the CMS, we propose to continue our development of graph neural
+networks for track based reconstruction on FPGA co-processors.
+While acceleration using FPGA co-processors is a new endeavor for our group 
+(as well as for the CMS collaboration), 
+our experience in computing (P. Elmer, D. Lange, J. Pivarski) and 
+high speed algorithms in the Level-1 Trigger (I. Ojalvo, L. Moreno)
+expertise and experience from both computing and hardware 
+developers as well as experience in designing and implementing
+machine learning based algorithms. %fix me
+
+David Lange has been XXX convener since XXX and is 
+David Lange, Peter Elmer, Isobel Ojalvo are organizing the Connecting the Dots
+workshop this year. The Connecting the Dots workshop series brings together 
+experts on track reconstruction and other problems involving pattern recognition 
+in sparsely sampled data. While the main focus will be on High Energy Physics (HEP) 
+detectors, the Connecting The Dots workshop is intended to be inclusive across other
+scientific disciplines wherever similar problems or solutions arise. 
+
+\section{Proposed Research Direction}
+The unambiguous identification of an event produced at the 
+LHC which contains a clear signature of Dark Matter, or perhaps 
+a SuperSymmetric particle would completely change our understanding 
+of the physical universe. However, the problem of sifting through 
+large data sets to identify a tiny fraction of interesting events 
+will only grow in the next ten years as data rates are expected to 
+increase dramatically while physicists search for increasingly rare 
+events and interactions. On the LHC ring, in the ATLAS and CMS detectors 
+collisions between particle bunches occur 40 million times per second. 
+During Run 2 (2015-2018) each bunch collision resulted in an average of 
+75 individual proton-proton interactions. In both ATLAS and CMS, close 
+to 150 million channels, as illustrated in Fig. 1, need to be read out, 
+creating a data rate of petabytes per second [1]. This rate must be 
+reduced by a factor of 10$^{6}$ within a few microseconds and then 
+by a further factor of 100 within a few milliseconds.
+%% 
+%% Acceleration Component - streamline, 
+%%research plan
+%% 1.) visualization exercise
+%% 2.) Node features
+%% 3.) 
+%% 4.) Parallelization on FPGAs
+%% Outline problem - Why GNNs
+%%copied
+
+Track finding and fitting is one of the most computationally challenging 
+problems for event reconstruction in particle physics.
+Currently at CMS track reconstruction relies on the Kalman filter method. 
+The filter proceeds iteratively from the seed layer, starting from a coarse estimate of 
+the track parameters provided by the seed, and including the
+information of the successive detection layers one by one. 
+On each layer, i.e. with every new measurement, the track parameters 
+are known with a better precision, up to the last point, where they 
+include the full tracker information.
+The Kalman Filter method is highly tuned for physics performance in today’s LHC 
+conditions, but is inherently sequential and scale poorly to the 
+expected HL-LHC conditions with O(10$^{4}$) particles and O(10$^{5}$) hits 
+in each event. %check me
+Advanced Machine Learning (ML) poses as an exciting solution to the issue of 
+algorithm scalability as many ML algorithms are expected to scale linearly %%cite me  
+with detector occupancy.
+In particular, the Graph Neural Network (GNN) poses as an interesting option
+given its ability to learn effective representations of high-dimensional data 
+through training and to model complex dynamics through computationally regular 
+transformation techniques.
+GNNs was first introduced in \cite{GNN_first}
+and has been applied to a growing variety of problems including social networks,
+and 3D Shape analysis. They have already been studied for particle for particle tracking
+applications in \cite{GNN_particletracking1,GNN_particletracking2} and for the problem
+of particle event classification in \cite{GNN_ec_1, GNN_ec_2, GNN_ec_3}.
+
+Our group is already 
+
+For track finding, we consider only tracks and hits in the barrel region of the detector. 
+The graph is constructed so that the nodes are the hits recorded by the detector and the 
+edges are connections of the hits between adjacent detector layers that pass a pre-defined
+filter that is tuned to be efficient for tracks resulting from high transverse momentum
+particles. Figure %%ref figure
+shows 
+
+%GNNs were first introduced in [16] and have been applied to a growing variety of problems including social networks, knowledge graphs, recommender systems, and 3D shape analysis [19, 5]. They were first studied for particle tracking applications in [10] and were also studied for the problem of particle and event classification in [3, 13, 15, 7].
+
+%For track finding, we consider only tracks and hits in the barrel region of the detector. The graph is constructed so that the nodes are the hits recorded by the detector and the edges are connections of the hits between adjacent detector layers that pass a pre-defined filter that is tuned to be efficient for tracks resulting from high transverse momentum particles. In the input graphs, node features are the three cylindrical coordinates (r, φ, z) and edge features are the difference of the coordinates (∆η, ∆φ). The edge labels are 1 if two hits come from the same track, and 0 otherwise.
+%The GNN architecture has three components: an encoder which transforms input node and edge features into their latent representations, a graph module which performs message passing to update latent features, and an output module which computes edge classification scores. A diagram of the architecture is shown in figure 1. The encoder uses two fully-connected 2-layer networks for transforming node and edge features, respectively. The initial latent features of the nodes and edges are collectively named H0. The graph module is applied recursively to the latent features. At each iteration i the initial features H0 are concatenated onto the current features Hi. This shortcut connection was empirically found to improve model performance. The graph module also uses two fully-connected 2-layer networks, one which computes updated edge features and one which computes updated node features using aggregated incoming edge features. After N iterations of the graph module, the output module takes the last latent features HN and uses a 2-layer fully-connected network to produce classification scores for every edge. All fully-connected layers use a hidden size of 128 and ReLU activation functions, except the final layer of the output module which uses sigmoid activation. We found that using N = 8 graph iterations gave the best model performance.
+
+This indicates great potential for discovering GNN architectures which can scale 
+to very large number of edges and that can handle multiple high energy particle 
+physics reconstruction tasks. This, in turn, would allow computing centers for 
+high energy physics to focus on certain types of acceleration and better determine 
+where to spend resources and effort in order to become as efficient as possible.
+
+We propose to transition the most CPU intensive steps, hit clustering and layer linking,
+to a highly parallel computing architecture making use of CPUs which have an FPGA co-processor. We have access to an Intel Xenon CPU + FPGA co-processor at computing 
+facilities at CERN and two similar devices are planned to be acquired at the 
+Princeton Research Computing center. We are excited to share progress regularly 
+in DataX forums and to collaborate with members of both the physics and computer science communities for advancement. For implementation, we will modify the existing cluster and track seed finding steps by developing a shallow NN to identify and disentangle shared clusters and then link clusters in neighboring layers to create primitive tracks. Monte Carlo truth information, which models the helical path of the charged particle through the detector, will be used for the training. We plan to test the NN performance on simulated events with 10 tracks, 100 tracks and 500 tracks. The completion of this project will result in the mapping out of resource usage and latency for various ranges of input data and network architectures.
+Upon successful completion of this project, our group will be the first to complete a NN based approach to track hit clustering and track seed reconstruction using an FPGA co-processor architecture, which will help maximize the HL-LHC physics reach. We will use these first preliminary studies to submit proposals to the DOE and to the NSF which will fully utilize FPGA co-processors to accelerate online object reconstruction at the CMS experiment. Specifically we will submit proposals to both continue the algorithmic research into using FPGAs (DOE Office of Science, SciDAC and ASCR, NSF PHY and OAC), and also for testbed compute resources (e.g. NSF CC* and/or MRI Track 1) as well as an eventual potential hardware upgrade (NSF MRI Track 2) for the CMS experiment.
+
+
+%%end copied
+
+%% Relevant expertise
+At Princeton we have a variety of expertise to support the appointed post-doc.
+Prof. Ojalvo has been responsible for xxxx
+As a member of the CMS Level-1 Trigger group we have recently hired a firmware
+engineer, Luis Perez Moreno, who has more than 6 years of professional experience in
+FPGA based firmware development with the ALICE detector. 
+Moreno has designed and implemented firmware for the ALICE
+Level-1 Trigger, and is currently working with the APDx Consortium to develop Gigabit Ethernet. He has extensive experience with RTL code development in VHDL. 
+
+\newpage
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%% \section{}
+%% \label{}
+
+%% References
+%%
+%% Following citation commands can be used in the body text:
+%% Usage of \cite is as follows:
+%%   \cite{key}          ==>>  [#]
+%%   \cite[chap. 2]{key} ==>>  [#, chap. 2]
+%%   \citet{key}         ==>>  Author [#]
+
+%% References with bibTeX database:
+
+%\bibliographystyle{model1-num-names}
+
+%\bibliography{sample.bib}
+\printbibliography
+
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use model1-num-names.bst.
+
+%% References without bibTeX database:
+
+% \begin{thebibliography}{00}
+
+%% \bibitem must have the following form:
+%%   \bibitem{key}...
+%%
+
+% \bibitem{}
+
+% \end{thebibliography}
+
+
+\end{document}
+
+%%
+%% End of file `elsarticle-template-1-num.tex'.
