@@ -239,11 +239,14 @@ particles.
 %research into using FPGAs (DOE Office of Science, SciDAC and ASCR, NSF PHY and OAC), and also for testbed
 %compute resources (e.g. NSF CC* and/or MRI Track 1) as well as an eventual potential hardware upgrade
 %(NSF MRI Track 2) for the CMS experiment. %% Check me
+%Node -> single tracker hit
+%Directed Edges -> connect hits
+%The GNN will link tracker hits by classifying these edges
 
 
-Figure %%ref figure
-, by Princeton postdoc Savannah Thais and graduate student Gage DeZoort, shows event displays of high quality
-tracks are used for training, the tracks are required to have at least xxx.
+Figure~\ref{fig:goodtracks}, from Princeton postdoc Savannah Thais and graduate student Gage DeZoort,
+shows event displays of high quality tracks that are used for training, the tracks are required to
+good radial progression (not interactions with the detector) and  have at least 3 hits in the pixel system.
 Work done by the Exa.Trkx group %cite
 has successfully constructed a GNN architecture which first tranforms input node and edge
 fratures into latent represenentations, a graph module which performs message passing to
@@ -261,6 +264,13 @@ to very large number of edges and that can handle multiple high energy particle
 physics reconstruction tasks. This, in turn, would allow computing centers for 
 high energy physics to focus on certain types of acceleration and better determine 
 where to spend resources and effort in order to become as efficient as possible.
+
+\begin{figure*}[htbp]
+\centering
+     \includegraphics[trim=0 0 0 120,clip,width=0.75\textwidth]{Good_Track_event_display.jpeg}
+     \caption{An event display of a high quality track which has at least 3 hits in the pixel layer. Work performed by postdoc Savannah Thais and graduate student Gage DeZoort.}
+     \label{fig:goodtracks}
+\end{figure*}
 
 We have recently started collaborating with the Exa.Trkx group to implement training methods
 and to test out GNN on FPGA co-processing.
@@ -282,13 +292,11 @@ for advancement.
 %%end copied
 
 %% Relevant expertise
-At Princeton we have a variety of expertise to support the appointed post-doc.
-Prof. Ojalvo has been responsible for xxxx
-As a member of the CMS Level-1 Trigger group we have recently hired a firmware
+I have been responsible for xxxx
+As a member of the CMS Level-1 Trigger group I have recently hired a firmware
 engineer, Luis Perez Moreno, who has more than 6 years of professional experience in
 FPGA based firmware development with the ALICE detector. 
-Moreno has designed and implemented firmware for the ALICE
-Level-1 Trigger, and is currently working with the APDx Consortium to develop Gigabit Ethernet. He has extensive experience with RTL code development in VHDL. 
+He has extensive experience with RTL code development in VHDL. 
 
 \newpage
 %% The Appendices part is started with the command \appendix;
