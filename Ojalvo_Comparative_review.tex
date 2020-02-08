@@ -145,15 +145,25 @@
 
 \section{Overview}
 \label{S:1}
-As a member of the CMS, we propose to continue our development of graph neural
-networks for track based reconstruction on FPGA co-processors.
-While acceleration using FPGA co-processors is a new endeavor for our group 
-(as well as for the CMS collaboration), 
-our experience in computing (P. Elmer, D. Lange, J. Pivarski) and 
-high speed algorithms in the Level-1 Trigger (I. Ojalvo, L. Moreno)
-expertise and experience from both computing and hardware 
-developers as well as experience in designing and implementing
-machine learning based algorithms. %fix me
+As a member of the CMS experiment, I propose to continue work developing both
+traditional and Machine Learning track based reconstruction on FPGA co-processors.
+While acceleration using FPGA co-processors is a new endeavor for my group 
+(as well as for the CMS collaboration) I have contributed to and served 
+in leadership positions in the CMS collaboration first as the developer of
+high speed algorithms for the the Level-1 trigger, put into place in 2015,
+then as the convener of the tau trigger development group (2014-2015) 
+and later as the convener of the tau physics object group (2015-2018).
+As a new faculty member at Princeton University, my focus is primarily
+on the develoment of optimized algorithms which will operate under the
+tight constraints that are XXX at the first step of data selection.
+I am working with Savannah Thais
+
+Firmware engineer, Luis Moreno Perez, who is working with
+the APD consortium.
+
+ (I. Ojalvo, L. Moreno),
+computing (P. Elmer, D. Lange, J. Pivarski) and machine learning (I. Ojalvo, S. Thais)
+puts in a good position to explore this new technology.
 
 David Lange has been XXX convener since XXX and is 
 David Lange, Peter Elmer, Isobel Ojalvo are organizing the Connecting the Dots
@@ -167,18 +177,19 @@ scientific disciplines wherever similar problems or solutions arise.
 The unambiguous identification of an event produced at the 
 LHC which contains a clear signature of Dark Matter, or perhaps 
 a SuperSymmetric particle would completely change our understanding 
-of the physical universe. However, the problem of sifting through 
+of the physical universe. However, the difficulty surrounding sifting through 
 large data sets to identify a tiny fraction of interesting events 
 will only grow in the next ten years as data rates are expected to 
 increase dramatically while physicists search for increasingly rare 
 events and interactions. On the LHC ring, in the ATLAS and CMS detectors 
 collisions between particle bunches occur 40 million times per second. 
-During Run 2 (2015-2018) each bunch collision resulted in an average of 
+During LHC Run 2 (2015-2018) each bunch collision resulted in an average of 
 75 individual proton-proton interactions. In both ATLAS and CMS, close 
 to 150 million channels, as illustrated in Fig. 1, need to be read out, 
-creating a data rate of petabytes per second [1]. This rate must be 
+creating a data rate of terabytes per second \cite{RoadMapComputing, big_data_computing}. This rate must be 
 reduced by a factor of 10$^{6}$ within a few microseconds and then 
-by a further factor of 100 within a few milliseconds.
+by a further factor of 100 within a few milliseconds in order to be stored
+for later analysis.
 %% 
 %% Acceleration Component - streamline, 
 %%research plan
@@ -205,22 +216,35 @@ in each event. %check me
 Advanced Machine Learning (ML) poses as an exciting solution to the issue of 
 algorithm scalability as many ML algorithms are expected to scale linearly %%cite me  
 with detector occupancy.
-In particular, the Graph Neural Network (GNN) poses as an interesting option
+In particular, the Graph Neural Network (GNN) is interesting option
 given its ability to learn effective representations of high-dimensional data 
 through training and to model complex dynamics through computationally regular 
 transformation techniques.
-GNNs was first introduced in \cite{GNN_first}
+GNNs were first introduced in \cite{GNN_first}
 and has been applied to a growing variety of problems including social networks,
 and 3D Shape analysis. They have already been studied for particle for particle tracking
 applications in \cite{GNN_particletracking1,GNN_particletracking2} and for the problem
 of particle event classification in \cite{GNN_ec_1, GNN_ec_2, GNN_ec_3}.
-
-Our group is working with Lindsey Gray (CMS, FNAL)
-
 The graph is constructed so that the nodes are the hits recorded by the detector and the 
 edges are connections of the hits between adjacent detector layers that pass a pre-defined
 filter which is tuned to be efficient for tracks resulting from high transverse momentum
-particles. Work done by the Exa.Trkx group %cite
+particles. 
+
+%insert these
+%Monte Carlo truth information, which models the helical path of the charged particle through the detector,
+%is used for the training. We plan to test the GNN performance on simulated events with 10 tracks,
+%100 tracks and 500 tracks. The completion of this project will result in the mapping out of resource
+%usage and latency for various ranges of input data and network architectures.
+%We have also submitted proposals to both continue the algorithmic
+%research into using FPGAs (DOE Office of Science, SciDAC and ASCR, NSF PHY and OAC), and also for testbed
+%compute resources (e.g. NSF CC* and/or MRI Track 1) as well as an eventual potential hardware upgrade
+%(NSF MRI Track 2) for the CMS experiment. %% Check me
+
+
+Figure %%ref figure
+, by Princeton postdoc Savannah Thais and graduate student Gage DeZoort, shows event displays of high quality
+tracks are used for training, the tracks are required to have at least xxx.
+Work done by the Exa.Trkx group %cite
 has successfully constructed a GNN architecture which first tranforms input node and edge
 fratures into latent represenentations, a graph module which performs message passing to
 update latent features, and an output module which computers edge classification scores.
@@ -228,12 +252,25 @@ The encoder uses two fully-conneected 2-layer networks for trnasforming node and
 features, respectively. The graph module is applied recursively to the latent features.
 After N iterations of graph module, the output module takes the last latent features
 and uses a 2-layer fully-connected network to produce classification scores for every
-edge. Studies from this group show that N = 8 graph iterations give the best model
+edge. All fully-connected layers use a hidden size of 128 and ReLU activation functions,
+except the final layer of the output module which uses sigmoid activation.
+Studies from this group show that N = 8 graph iterations give the best model
 performance.
+This indicates great potential for discovering GNN architectures which can scale 
+to very large number of edges and that can handle multiple high energy particle 
+physics reconstruction tasks. This, in turn, would allow computing centers for 
+high energy physics to focus on certain types of acceleration and better determine 
+where to spend resources and effort in order to become as efficient as possible.
 
-Figure %%ref figure
-, produced by Princeton graduate student Gage DeZoort, shows event displays of high quality
-tracks which will be used for training.
+We have recently started collaborating with the Exa.Trkx group to implement training methods
+and to test out GNN on FPGA co-processing.
+Our group is also collaborating with Lindsey Gray (CMS, FNAL) on implementation with CMSSW.
+We propose to transition the most CPU intensive steps %which ones?
+to a highly parallel computing architecture making use of CPUs which have an FPGA co-processor.
+The Princeton Research Computing center has recently purchased an Intel Xenon CPU + FPGA co-processor
+and similar devices are available at CERN. We are excited to share progress regularly 
+in USCMS forums and to collaborate with members of both the physics and computer science communities
+for advancement. 
 
 
 %GNNs were first introduced in [16] and have been applied to a growing variety of problems including social networks, knowledge graphs, recommender systems, and 3D shape analysis [19, 5]. They were first studied for particle tracking applications in [10] and were also studied for the problem of particle and event classification in [3, 13, 15, 7].
@@ -241,29 +278,6 @@ tracks which will be used for training.
 %The graph is constructed so that the nodes are the hits recorded by the detector and theedges are connections of the hits between adjacent detector layers that pass a pre-defined filter that is tuned to be efficient for tracks resulting from high transverse momentum particles. In the input graphs, node features are the three cylindrical coordinates (r, φ, z) and edge features are the difference of the coordinates (∆η, ∆φ). The edge labels are 1 if two hits come from the same track, and 0 otherwise.
 %The GNN architecture has three components:
 %an encoder which transforms input node and edge features into their latent representations, a graph module which performs message passing to update latent features, and an output module which computes edge classification scores. A diagram of the architecture is shown in figure 1. The encoder uses two fully-connected 2-layer networks for transforming node and edge features, respectively. The initial latent features of the nodes and edges are collectively named H0. The graph module is applied recursively to the latent features. At each iteration i the initial features H0 are concatenated onto the current features Hi. This shortcut connection was empirically found to improve model performance. The graph module also uses two fully-connected 2-layer networks, one which computes updated edge features and one which computes updated node features using aggregated incoming edge features. After N iterations of the graph module, the output module takes the last latent features HN and uses a 2-layer fully-connected network to produce classification scores for every edge. All fully-connected layers use a hidden size of 128 and ReLU activation functions, except the final layer of the output module which uses sigmoid activation. We found that using N = 8 graph iterations gave the best model performance.
-
-This indicates great potential for discovering GNN architectures which can scale 
-to very large number of edges and that can handle multiple high energy particle 
-physics reconstruction tasks. This, in turn, would allow computing centers for 
-high energy physics to focus on certain types of acceleration and better determine 
-where to spend resources and effort in order to become as efficient as possible.
-
-We propose to transition the most CPU intensive steps, hit clustering and layer linking,
-to a highly parallel computing architecture making use of CPUs which have an FPGA co-processor.
-The Princeton Research Computing center has recently purchased an Intel Xenon CPU + FPGA co-processor
-and similar devices areavailable at CERN. We are excited to share progress regularly 
-in USCMS forums and to collaborate with members of both the physics and computer science communities
-for advancement. 
-
-Monte Carlo truth information, which models the helical path of the charged particle through the detector,
-will be used for the training. We plan to test the GNN performance on simulated events with 10 tracks,
-100 tracks and 500 tracks. The completion of this project will result in the mapping out of resource
-usage and latency for various ranges of input data and network architectures.
-We have also submitted proposals to both continue the algorithmic
-research into using FPGAs (DOE Office of Science, SciDAC and ASCR, NSF PHY and OAC), and also for testbed
-compute resources (e.g. NSF CC* and/or MRI Track 1) as well as an eventual potential hardware upgrade
-(NSF MRI Track 2) for the CMS experiment. %% Check me
-
 
 %%end copied
 
