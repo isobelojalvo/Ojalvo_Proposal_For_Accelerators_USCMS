@@ -145,7 +145,7 @@
 
 \section{Overview}
 \label{S:1}
-As a member of the CMS experiment, I propose to continue work developing both
+As a member of the CMS experiment~\cite{CMS-JINST}, I propose to continue work developing both
 traditional and Machine Learning track based reconstruction on FPGA co-processors.
 While acceleration using FPGA co-processors is a new endeavor for my group 
 (as well as for the CMS collaboration) I have contributed to and served 
@@ -156,7 +156,8 @@ and later as the convener of the tau physics object group (2015-2018).
 Currently, I serve as the US CMS Level-1 Trigger Operations deputy.
 I am working with my postdoc Savannah Thais and graduate student Gage DeZoort
 on the development of low latency track reconstruction algorithms
-that can be run either online or offline. 
+that can be run either online (in an upgraded High Level Trigger (HLT)) or offline
+(either integrated into future computing facilities or in cloud based services~\cite{Duarte_2019}). 
 
 As a new faculty member at Princeton University, my research focus is 
 on the development of optimized algorithms for the CMS trigger system.
@@ -186,11 +187,19 @@ events and interactions. On the LHC ring, in the ATLAS and CMS detectors
 collisions between particle bunches occur 40 million times per second. 
 During LHC Run 2 (2015-2018) each bunch collision resulted in an average of 
 75 individual proton-proton interactions. In both ATLAS and CMS, close 
-to 150 million channels, as illustrated in Fig. 1, need to be read out, 
+to 150 million channels, as illustrated in Figure~\ref{fig:millionchannels}, need to be read out, 
 creating a data rate of terabytes per second \cite{RoadMapComputing, big_data_computing}. This rate must be 
 reduced by a factor of 10$^{6}$ within a few microseconds and then 
 by a further factor of 100 within a few milliseconds in order to be stored
 for later analysis.
+\begin{figure*}[htbp]
+\centering
+     \includegraphics[trim=0 0 0 0,clip,width=0.65\textwidth]{MillionChannels.png}
+     \caption{The CMS detector has over 100 million channels. As the number of simultaneous collisions increase from an average of 75 in 2018 to 200 in the 2026 and beyond, 
+     reconstruction of charged particle tracks will become an increasingly complex problem.}
+     \label{fig:millionchannels}
+\end{figure*}
+
 %% 
 %% Acceleration Component - streamline, 
 %%research plan
@@ -203,7 +212,13 @@ for later analysis.
 
 Track finding and fitting is one of the most computationally challenging 
 problems for event reconstruction in particle physics.
-Currently at CMS track reconstruction relies on the Kalman filter method. 
+The CMS experiment has 
+a specialized tracking system that consists of multiple layers of highly granular 
+sensors which are designed to measure both the position and the curvature of the 
+charged particle. The many layers and multiple possible paths for each charged 
+particle turns the track reconstruction into a highly complex "connecting the dots" 
+problem, as illustrated in Fig. 3.
+Currently at CMS, track reconstruction relies on the Kalman filter method. 
 The filter proceeds iteratively from the seed layer, starting from a coarse estimate of 
 the track parameters provided by the seed, and including the
 information of the successive detection layers one by one. 
@@ -211,9 +226,10 @@ On each layer, i.e. with every new measurement, the track parameters
 are known with a better precision, up to the last point, where they 
 include the full tracker information.
 The Kalman Filter method is highly tuned for physics performance in today’s LHC 
-conditions, but is inherently sequential and scale poorly to the 
-expected HL-LHC conditions with O(10$^{4}$) particles and O(10$^{5}$) hits 
-in each event. %check me
+conditions but the computation time has been shown to scale quadratically or worse with 
+detector occupancy\cite{Cerati_2015}. 
+
+
 Advanced Machine Learning (ML) poses as an exciting solution to the issue of 
 algorithm scalability as many ML algorithms are expected to scale linearly %%cite me  
 with detector occupancy.
@@ -221,11 +237,11 @@ In particular, the Graph Neural Network (GNN) is interesting option
 given its ability to learn effective representations of high-dimensional data 
 through training and to model complex dynamics through computationally regular 
 transformation techniques.
-GNNs were first introduced in \cite{GNN_first}
+GNNs were first introduced in \cite{4700287}
 and has been applied to a growing variety of problems including social networks,
-and 3D Shape analysis. They have already been studied for particle for particle tracking
-applications in \cite{GNN_particletracking1,GNN_particletracking2} and for the problem
-of particle event classification in \cite{GNN_ec_1, GNN_ec_2, GNN_ec_3}.
+and 3D Shape analysis \cite{zhou2018graph}. They have already been studied for particle for particle tracking
+applications in \cite{farrell2018novel} and for the problem
+of particle event classification in \cite{martinez2018pileup,qu2019particlenet}.
 The graph is constructed so that the nodes are the hits recorded by the detector and the 
 edges are connections of the hits between adjacent detector layers that pass a pre-defined
 filter which is tuned to be efficient for tracks resulting from high transverse momentum
@@ -245,15 +261,15 @@ particles.
 %The GNN will link tracker hits by classifying these edges
 \begin{figure*}[htbp]
 \centering
-     \includegraphics[trim=0 0 0 120,clip,width=0.75\textwidth]{Good_Track_event_display.jpeg}
-     \caption{An event display of a high quality track which has at least 3 hits in the pixel layer. Work performed by postdoc Savannah Thais and graduate student Gage DeZoort.}
+     \includegraphics[trim=0 400 0 0,clip,width=0.95\textwidth]{Good_Track_event_display.jpeg}
+     \caption{An event display of a high quality track which has at least 3 hits in the pixel layer. Work by postdoc Savannah Thais and graduate student Gage DeZoort.}
      \label{fig:goodtracks}
 \end{figure*}
 
 Figure~\ref{fig:goodtracks}, from Princeton postdoc Savannah Thais and graduate student Gage DeZoort,
 shows event displays of high quality tracks that are used for training, the tracks are required to
 good radial progression (not interactions with the detector) and  have at least 3 hits in the pixel system.
-Work done by the Exa.Trkx group %cite
+Work done by the Exa.Trkx group \cite{calafiura}
 has successfully constructed a GNN architecture which first transforms input node and edge
 features into latent representations, a graph module which performs message passing to
 update latent features, and an output module which computers edge classification scores.
@@ -271,7 +287,6 @@ physics reconstruction tasks. This, in turn, would allow computing centers for
 high energy physics to focus on certain types of acceleration and better determine 
 where to spend resources and effort in order to become as efficient as possible.
 
-
 We have recently started collaborating with the Exa.Trkx group to implement training methods
 and to test out GNN on FPGA co-processing.
 Our group is also collaborating with Lindsey Gray (CMS, FNAL) on implementation with CMSSW.
@@ -279,8 +294,8 @@ We propose to transition the most CPU intensive steps %which ones?
 to a highly parallel computing architecture making use of CPUs which have an FPGA co-processor.
 The Princeton Research Computing center has recently purchased an Intel Xenon CPU + FPGA co-processor
 and similar devices are available at CERN. We are excited to share progress regularly 
-in USCMS forums and to collaborate with members of both the physics and computer science communities
-for advancement. 
+in USCMS forums and to collaborate with members of 
+both the physics and computer science communities for advancement. 
 
 
 %GNNs were first introduced in [16] and have been applied to a growing variety of problems including social networks, knowledge graphs, recommender systems, and 3D shape analysis [19, 5]. They were first studied for particle tracking applications in [10] and were also studied for the problem of particle and event classification in [3, 13, 15, 7].
@@ -292,11 +307,6 @@ for advancement.
 %%end copied
 
 %% Relevant expertise
-I have been responsible for xxxx
-As a member of the CMS Level-1 Trigger group I have recently hired a firmware
-engineer, Luis Perez Moreno, who has more than 6 years of professional experience in
-FPGA based firmware development with the ALICE detector. 
-He has extensive experience with RTL code development in VHDL. 
 
 \newpage
 %% The Appendices part is started with the command \appendix;
