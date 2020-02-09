@@ -153,21 +153,22 @@ in leadership positions in the CMS collaboration first as the developer of
 high speed algorithms for the the Level-1 trigger, put into place in 2015,
 then as the convener of the tau trigger development group (2014-2015) 
 and later as the convener of the tau physics object group (2015-2018).
-As a new faculty member at Princeton University, my focus is primarily
-on the develoment of optimized algorithms which will operate under the
-tight constraints that are XXX at the first step of data selection.
-I am working with Savannah Thais
+Currently, I serve as the US CMS Level-1 Trigger Operations deputy.
+I am working with my postdoc Savannah Thais and graduate student Gage DeZoort
+on the development of low latency track reconstruction algorithms
+that can be run either online or offline. 
 
-Firmware engineer, Luis Moreno Perez, who is working with
-the APD consortium.
-
- (I. Ojalvo, L. Moreno),
-computing (P. Elmer, D. Lange, J. Pivarski) and machine learning (I. Ojalvo, S. Thais)
-puts in a good position to explore this new technology.
-
-David Lange has been XXX convener since XXX and is 
-David Lange, Peter Elmer, Isobel Ojalvo are organizing the Connecting the Dots
-workshop this year. The Connecting the Dots workshop series brings together 
+As a new faculty member at Princeton University, my research focus is 
+on the development of optimized algorithms for the CMS trigger system.
+We have recently hired a dedicated firmware engineer, Luis Moreno Perez,
+who is working with the US CMS APD consortium to develop and design firmware
+for trigger processor boards that use Xilinx Virtex 7 and Ultrascale+ 
+Field Programmable Gate Arrays (FPGAs) for high speed data processing.
+We are working in collaboration with the Princeton computing group led by Peter Elmer,
+with David Lange and Bei Wang, on track reconstruction optimization. 
+I also serve on the local organizing committee of the 2020 Connecting the Dots 
+workshop series which will be hosted at Princeton University. This workshop
+series brings together 
 experts on track reconstruction and other problems involving pattern recognition 
 in sparsely sampled data. While the main focus will be on High Energy Physics (HEP) 
 detectors, the Connecting The Dots workshop is intended to be inclusive across other
@@ -242,16 +243,21 @@ particles.
 %Node -> single tracker hit
 %Directed Edges -> connect hits
 %The GNN will link tracker hits by classifying these edges
-
+\begin{figure*}[htbp]
+\centering
+     \includegraphics[trim=0 0 0 120,clip,width=0.75\textwidth]{Good_Track_event_display.jpeg}
+     \caption{An event display of a high quality track which has at least 3 hits in the pixel layer. Work performed by postdoc Savannah Thais and graduate student Gage DeZoort.}
+     \label{fig:goodtracks}
+\end{figure*}
 
 Figure~\ref{fig:goodtracks}, from Princeton postdoc Savannah Thais and graduate student Gage DeZoort,
 shows event displays of high quality tracks that are used for training, the tracks are required to
 good radial progression (not interactions with the detector) and  have at least 3 hits in the pixel system.
 Work done by the Exa.Trkx group %cite
-has successfully constructed a GNN architecture which first tranforms input node and edge
-fratures into latent represenentations, a graph module which performs message passing to
+has successfully constructed a GNN architecture which first transforms input node and edge
+features into latent representations, a graph module which performs message passing to
 update latent features, and an output module which computers edge classification scores.
-The encoder uses two fully-conneected 2-layer networks for trnasforming node and edge
+The encoder uses two fully-connected 2-layer networks for transforming node and edge
 features, respectively. The graph module is applied recursively to the latent features.
 After N iterations of graph module, the output module takes the last latent features
 and uses a 2-layer fully-connected network to produce classification scores for every
@@ -265,12 +271,6 @@ physics reconstruction tasks. This, in turn, would allow computing centers for
 high energy physics to focus on certain types of acceleration and better determine 
 where to spend resources and effort in order to become as efficient as possible.
 
-\begin{figure*}[htbp]
-\centering
-     \includegraphics[trim=0 0 0 120,clip,width=0.75\textwidth]{Good_Track_event_display.jpeg}
-     \caption{An event display of a high quality track which has at least 3 hits in the pixel layer. Work performed by postdoc Savannah Thais and graduate student Gage DeZoort.}
-     \label{fig:goodtracks}
-\end{figure*}
 
 We have recently started collaborating with the Exa.Trkx group to implement training methods
 and to test out GNN on FPGA co-processing.
