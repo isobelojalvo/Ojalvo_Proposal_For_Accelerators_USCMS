@@ -141,7 +141,7 @@
 
 
 \noindent
-\textbf{Acceleration of Track Reconstruction at CMS Using FPGA Co-processors}
+\textbf{Acceleration of Track Reconstruction at CMS Using FPGA Co-Processors}
 
 \section{Overview}
 \label{S:1}
@@ -188,13 +188,13 @@ collisions between particle bunches occur 40 million times per second.
 During LHC Run 2 (2015-2018) each bunch collision resulted in an average of 
 75 individual proton-proton interactions. In both ATLAS and CMS, close 
 to 150 million channels, as illustrated in Figure~\ref{fig:millionchannels}, need to be read out, 
-creating a data rate of terabytes per second \cite{RoadMapComputing, big_data_computing}. This rate must be 
+creating a data rate of hundreds of terabytes per second \cite{RoadMapComputing, big_data_computing}. This rate must be 
 reduced by a factor of 10$^{6}$ within a few microseconds and then 
 by a further factor of 100 within a few milliseconds in order to be stored
 for later analysis.
 \begin{figure*}[htbp]
 \centering
-     \includegraphics[trim=0 0 0 0,clip,width=0.65\textwidth]{MillionChannels.png}
+     \includegraphics[trim=0 0 0 0,clip,width=0.5\textwidth]{MillionChannels.png}
      \caption{The CMS detector has over 100 million channels. As the number of simultaneous collisions increase from an average of 75 in 2018 to 200 in the 2026 and beyond, 
      reconstruction of charged particle tracks will become an increasingly complex problem.}
      \label{fig:millionchannels}
@@ -217,7 +217,7 @@ a specialized tracking system that consists of multiple layers of highly granula
 sensors which are designed to measure both the position and the curvature of the 
 charged particle. The many layers and multiple possible paths for each charged 
 particle turns the track reconstruction into a highly complex "connecting the dots" 
-problem, as illustrated in Fig. 3.
+problem, as illustrated in Figure~\ref{fig:connectthedots}.
 Currently at CMS, track reconstruction relies on the Kalman filter method. 
 The filter proceeds iteratively from the seed layer, starting from a coarse estimate of 
 the track parameters provided by the seed, and including the
@@ -228,6 +228,13 @@ include the full tracker information.
 The Kalman Filter method is highly tuned for physics performance in today’s LHC 
 conditions but the computation time has been shown to scale quadratically or worse with 
 detector occupancy\cite{Cerati_2015}. 
+
+\begin{figure*}[htbp]
+\centering
+     \includegraphics[trim=0 0 0 0,clip,width=0.65\textwidth]{ConnectTheDots.png}
+     \caption{The detector’s layers are linked together to infer the trajectory of individual charged particles in a complex "connect the dots" puzzle. This problem will grow even more complex in the next ten years when the number of proton-proton interactions increases from 20 in 2015 conditions (left), to 140 (right) which is expected at the HL-LHC.}
+     \label{fig:connectthedots}
+\end{figure*}
 
 
 Advanced Machine Learning (ML) poses as an exciting solution to the issue of 
@@ -289,12 +296,13 @@ where to spend resources and effort in order to become as efficient as possible.
 
 We have recently started collaborating with the Exa.Trkx group to implement training methods
 and to test out GNN on FPGA co-processing.
-Our group is also collaborating with Lindsey Gray (CMS, FNAL) on implementation with CMSSW.
+Our group is also collaborating with Lindsey Gray (CMS, FNAL) on implementation with the
+CMS Software Framework.
 We propose to transition the most CPU intensive steps %which ones?
-to a highly parallel computing architecture making use of CPUs which have an FPGA co-processor.
+to a highly parallel computing architecture making use of CPUs that have an FPGA co-processor.
 The Princeton Research Computing center has recently purchased an Intel Xenon CPU + FPGA co-processor
 and similar devices are available at CERN. We are excited to share progress regularly 
-in USCMS forums and to collaborate with members of 
+in CMS and USCMS forums and to collaborate with members of 
 both the physics and computer science communities for advancement. 
 
 
